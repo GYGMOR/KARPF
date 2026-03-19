@@ -43,16 +43,16 @@ export default function Navigation() {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="w-12 h-12 relative">
-              <Image
-                src="/images/logo.png"
-                alt="KARPF Logo"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <div className={`transition-colors duration-300 ${scrolled ? 'text-primary-green' : 'text-white'}`}>
-              <div className="font-display font-bold text-2xl leading-none">KARPF</div>
+            <div className={`transition-colors duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-lg' : ''}`}>
+              <div className="w-48 h-12 relative">
+                <Image
+                  src="/images/logo.png"
+                  alt="KARPF Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </div>
           </motion.a>
 

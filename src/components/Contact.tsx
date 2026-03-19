@@ -127,7 +127,7 @@ export default function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-6 py-4 bg-white/95 backdrop-blur-sm border-2 border-white rounded-xl text-accent-brown placeholder-accent-brown/50 focus:border-accent-orange focus:bg-white focus:outline-none transition-all duration-300 font-body shadow-xl"
+                  className="w-full px-6 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl text-white placeholder-white/60 focus:border-white focus:bg-white/20 focus:outline-none transition-all duration-300 font-body shadow-inner"
                   placeholder="+41 76 123 45 67"
                 />
               </div>
@@ -202,7 +202,7 @@ export default function Contact() {
                 <div>
                   <h3 className="font-display text-xl font-bold text-accent-brown mb-2">Telefon</h3>
                   <a
-                    href="tel:0768313242"
+                    href="tel:0566673676"
                     className="font-body text-accent-brown hover:text-primary-green transition-colors duration-300 text-lg font-semibold"
                   >
                     056 667 36 76
@@ -221,7 +221,7 @@ export default function Contact() {
                 <div>
                   <h3 className="font-display text-xl font-bold text-accent-brown mb-2">E-Mail</h3>
                   <a
-                    href="mailto:ackertgarten@hotmail.com"
+                    href="mailto:info@karpfgarten.ch"
                     className="font-body text-accent-brown hover:text-primary-green transition-colors duration-300 break-all font-semibold"
                   >
                     info@karpfgarten.ch
