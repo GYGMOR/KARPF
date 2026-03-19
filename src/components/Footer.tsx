@@ -36,16 +36,14 @@ export default function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 relative">
+              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl flex items-center justify-center group/logo hover:scale-105 transition-transform duration-500">
                 <Image
                   src="/images/logo.png"
-                  alt="KARPF"
-                  fill
-                  className="object-contain"
+                  alt="KARPF Logo"
+                  width={200}
+                  height={64}
+                  className="h-16 w-auto object-contain"
                 />
-              </div>
-              <div>
-                <div className="font-display font-bold text-2xl">KARPF</div>
               </div>
             </div>
             <p className="text-white/90 font-body leading-relaxed mb-8 text-sm">
@@ -55,7 +53,7 @@ export default function Footer() {
             {/* Contact Quick Info */}
             <div className="space-y-3 text-sm">
               <a
-                href="tel:0768313242"
+                href="tel:0566673676"
                 className="flex items-center gap-3 hover:text-accent-orange transition-colors duration-300 group"
               >
                 <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-accent-orange transition-all duration-300">
@@ -67,7 +65,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="mailto:ackertgarten@hotmail.com"
+                href="mailto:info@karpfgarten.ch"
                 className="flex items-center gap-3 hover:text-accent-orange transition-colors duration-300 group"
               >
                 <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-accent-orange transition-all duration-300">

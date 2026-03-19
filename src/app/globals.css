@@ -1,18 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary-green: #52b44a;
+  --color-primary-green-dark: #3a8033;
+  --color-primary-green-light: #6fcc63;
+  --color-accent-orange: #e8a55c;
+  --color-accent-orange-dark: #d48f3f;
+  --color-accent-brown: #3d2416;
+  --color-neutral-cream: #f8f6f2;
+  --color-neutral-stone: #e5e2dd;
+  
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Manrope', sans-serif;
+}
 
 :root {
-  --primary-green: #52b44a;
-  --primary-green-dark: #3a8033;
-  --primary-green-light: #6fcc63;
-  --accent-orange: #e8a55c;
-  --accent-orange-dark: #d48f3f;
-  --accent-brown: #3d2416;
-  --neutral-cream: #f8f6f2;
-  --neutral-stone: #e5e2dd;
+  --primary-green: var(--color-primary-green);
+  --primary-green-dark: var(--color-primary-green-dark);
+  --primary-green-light: var(--color-primary-green-light);
+  --accent-orange: var(--color-accent-orange);
+  --accent-orange-dark: var(--color-accent-orange-dark);
+  --accent-brown: var(--color-accent-brown);
+  --neutral-cream: var(--color-neutral-cream);
+  --neutral-stone: var(--color-neutral-stone);
 }
 
 * {

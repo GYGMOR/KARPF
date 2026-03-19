@@ -67,9 +67,9 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
             <motion.div variants={itemVariants} className="space-y-6">
               <p className="font-body text-lg md:text-xl text-accent-brown/80 leading-relaxed">
-                Ackert Garten GmbH steht seit über zwei Jahrzehnten für
-                erstklassige Gartengestaltung und professionellen Landschaftsbau
-                in Schönenwerd und der gesamten Region.
+                KARPF steht seit über zwei Jahrzehnten für erstklassige
+                Gartengestaltung und professionellen Landschaftsbau in
+                Sarmenstorf und der gesamten Region.
               </p>
               <p className="font-body text-lg md:text-xl text-accent-brown/80 leading-relaxed">
                 Mit Herzblut, Fachkompetenz und einem Auge für Details verwandeln

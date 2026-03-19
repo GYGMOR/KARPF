@@ -51,13 +51,13 @@ export default function Projects() {
             UNSERE PROJEKTE
           </span>
           <h2 className="font-display text-5xl md:text-7xl font-bold text-accent-brown mb-8">
-            Verwirklichte
+            Unsere
             <br />
-            <span className="text-accent-orange">Gartenträume</span>
+            <span className="text-primary-green">Referenzen</span>
           </h2>
           <p className="font-body text-lg md:text-xl text-accent-brown/70 max-w-3xl mx-auto">
-            Jedes Projekt ist einzigartig – überzeugen Sie sich von unserer Arbeit
-            und lassen Sie sich inspirieren.
+            Ein Einblick in unsere tägliche Arbeit. Wir verwandeln kahle Flächen
+            in blühende Landschaften und funktionale Aussenräume.
           </p>
         </motion.div>
 

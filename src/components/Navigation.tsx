@@ -121,7 +121,7 @@ export default function Navigation() {
                 </a>
               ))}
               <a
-                href="tel:0768313242"
+                href="tel:0566673676"
                 className="px-6 py-3 bg-primary-green text-white rounded-full font-body font-semibold text-center hover:bg-primary-green-dark transition-all duration-300"
               >
                 056 667 36 76
