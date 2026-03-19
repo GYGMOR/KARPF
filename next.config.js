@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   images: {
     unoptimized: true,
   },
-  // Static export for shared hosting
+  // Remove output: 'export' to allow serverless functions (like /api/contact) on Vercel
   trailingSlash: true,
 }
 
-module.exports = nextConfig
+export default nextConfig
