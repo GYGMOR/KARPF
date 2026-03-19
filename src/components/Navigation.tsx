@@ -1,135 +1,130 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function Navigation() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const navItems = [
-    { label: 'Über uns', href: '#about' },
-    { label: 'Leistungen', href: '#services' },
-    { label: 'Projekte', href: '#projects' },
-    { label: 'Kontakt', href: '#contact' },
-  ]
+  const navLinks = [
+    { name: "Home", href: "#hero" },
+    { name: "Projekte", href: "#projects" },
+    { name: "Über uns", href: "#about" },
+    { name: "Kontakt", href: "#contact" },
+  ];
+
+  const scrollToSection = (id: string) => {
+    const element = document.querySelector(id.startsWith('/') ? id.substring(1) : id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "bg-[#FDFBF7] shadow-sm py-4 text-[#2D241E]"
+      )}
     >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <motion.a
-            href="#hero"
-            className="flex items-center gap-3"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className={`transition-colors duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-lg' : ''}`}>
-              <div className="w-48 h-12 relative">
-                <Image
-                  src="/images/logo.png"
-                  alt="KARPF Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" onClick={() => scrollToSection("#hero")}>
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <div className={cn(
+              "h-16 w-48 relative transition-all duration-300",
+              isScrolled ? "scale-90" : "scale-100"
+            )}>
+              <Image
+                src="/images/logo.png"
+                alt="KARPF Logo"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
-          </motion.a>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.href}
-                href={item.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.3 }}
-                className={`font-body font-medium text-sm tracking-wide transition-colors duration-300 hover:text-accent-orange relative group ${
-                  scrolled ? 'text-accent-brown' : 'text-white'
-                }`}
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent-orange transition-all duration-300 group-hover:w-full" />
-              </motion.a>
-            ))}
-            <motion.a
-              href="tel:0768313242"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.7 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-primary-green text-white rounded-full font-body font-semibold text-sm hover:bg-primary-green-dark transition-all duration-300 shadow-lg hover:shadow-xl"
+          </div>
+        </Link>
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-10">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(link.href);
+              }}
+              className={cn(
+                "text-sm font-medium transition-colors relative group py-2",
+                "text-[#5D4037] hover:text-primary"
+              )}
+            >
+              {link.name}
+              <span className={cn(
+                "absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full",
+                "bg-primary"
+              )} />
+            </Link>
+          ))}
+          <a href="tel:0566673676">
+            <Button
+              variant="default"
+              className="bg-primary hover:bg-primary/90 text-white font-bold rounded-full px-6 transition-all hover:scale-105"
             >
               056 667 36 76
-            </motion.a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`md:hidden flex flex-col gap-1.5 w-8 h-8 justify-center transition-colors duration-300 ${
-              scrolled ? 'text-accent-brown' : 'text-white'
-            }`}
-          >
-            <span className={`block h-0.5 w-full bg-current transition-transform duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-            <span className={`block h-0.5 w-full bg-current transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`} />
-            <span className={`block h-0.5 w-full bg-current transition-transform duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-          </button>
+            </Button>
+          </a>
         </div>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X className="text-[#2D241E]" /> : <Menu className="text-[#2D241E]" />}
+        </button>
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 backdrop-blur-md border-t border-neutral-stone"
-          >
-            <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="font-body font-medium text-accent-brown hover:text-primary-green transition-colors duration-300 py-2"
-                >
-                  {item.label}
-                </a>
-              ))}
-              <a
-                href="tel:0566673676"
-                className="px-6 py-3 bg-primary-green text-white rounded-full font-body font-semibold text-center hover:bg-primary-green-dark transition-all duration-300"
-              >
-                056 667 36 76
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
-  )
+      {isMobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-[#FDFBF7] border-b border-[#5D4037]/10 p-6 md:hidden flex flex-col gap-6 shadow-xl">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(link.href);
+              }}
+              className="text-xl font-display font-bold text-[#2D241E] hover:text-primary"
+            >
+              {link.name}
+            </Link>
+          ))}
+          <a href="tel:0566673676">
+            <Button
+              className="w-full bg-primary text-white font-bold rounded-full h-12"
+            >
+              056 667 36 76
+            </Button>
+          </a>
+        </div>
+      )}
+    </nav>
+  );
 }

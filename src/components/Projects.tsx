@@ -1,143 +1,122 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 const projects = [
   {
-    title: 'Moderne Terrassenanlage',
-    category: 'Landschaftsbau',
-    color: 'from-primary-green to-primary-green-dark',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop',
+    id: 1,
+    slug: "rollrasen",
+    title: "Rollrasen",
+    category: "Rollrasen",
+    image: "/images/project-rollrasen.jpg",
+    description: "Professionelle Verlegung von hochwertigem schweizer Rollrasen für sofortiges Grün."
   },
   {
-    title: 'Naturnaher Hausgarten',
-    category: 'Gartengestaltung',
-    color: 'from-accent-orange to-accent-orange-dark',
-    image: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&auto=format&fit=crop',
+    id: 3,
+    slug: "landschaftsbau",
+    title: "Landschaftsbau",
+    category: "Landschaftsbau",
+    image: "/images/project-landschaftsbau-ref.jpg",
+    description: "Professioneller Landschaftsbau für anspruchsvolle Aussenanlagen und Geländestrukturen."
   },
   {
-    title: 'Pflegeleichte Vorgärten',
-    category: 'Gartenpflege',
-    color: 'from-primary-green-light to-primary-green',
-    image: 'https://images.unsplash.com/photo-1584738766473-61c083514bf4?w=800&auto=format&fit=crop',
-  },
-  {
-    title: 'Exklusive Poolanlage',
-    category: 'Umgebungsarbeiten',
-    color: 'from-primary-green-dark to-accent-brown',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&auto=format&fit=crop',
-  },
-]
+    id: 2,
+    slug: "gartengestaltung",
+    title: "Gartengestaltung",
+    category: "Gartengestaltung",
+    image: "/images/project-gartengestaltung-ref.jpg",
+    description: "Individuelle Gartengestaltung, die Ästhetik und Funktionalität harmonisch vereint."
+  }
+];
 
 export default function Projects() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [activeProject, setActiveProject] = useState(0);
 
   return (
-    <section
-      id="projects"
-      ref={ref}
-      className="relative py-32 bg-gradient-to-b from-neutral-cream to-white overflow-hidden"
-    >
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
-          <span className="inline-block px-6 py-2 bg-primary-green/10 rounded-full text-primary-green font-body font-semibold text-sm tracking-wider mb-6">
-            UNSERE PROJEKTE
-          </span>
-          <h2 className="font-display text-5xl md:text-7xl font-bold text-accent-brown mb-8">
-            Unsere
-            <br />
-            <span className="text-primary-green">Referenzen</span>
-          </h2>
-          <p className="font-body text-lg md:text-xl text-accent-brown/70 max-w-3xl mx-auto">
-            Ein Einblick in unsere tägliche Arbeit. Wir verwandeln kahle Flächen
-            in blühende Landschaften und funktionale Aussenräume.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              whileHover={{ y: -12 }}
-              className="group relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer"
-            >
-              {/* Background Image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: `url(${project.image})` }}
-              />
-
-              {/* Overlay Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/90 transition-all duration-500`} />
-
-              {/* Content */}
-              <div className="relative h-full flex flex-col justify-end p-8 text-white">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileHover={{ opacity: 1, y: 0 }}
-                  className="mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                >
-                  <span className="inline-block px-4 py-1.5 bg-black/40 backdrop-blur-md rounded-full text-sm font-body font-medium border-2 border-white shadow-lg">
-                    {project.category}
-                  </span>
-                </motion.div>
-                <h3 className="font-display text-3xl md:text-4xl font-bold mb-3">
-                  {project.title}
-                </h3>
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileHover={{ width: '100%' }}
-                  className="h-1 bg-white/50 rounded-full"
-                  transition={{ duration: 0.4 }}
-                />
-              </div>
-
-              {/* Hover Icon */}
-              <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                whileHover={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.4 }}
-                className="absolute top-8 right-8 w-12 h-12 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white shadow-xl"
-              >
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </motion.div>
-            </motion.div>
-          ))}
+    <section id="projects" className="py-32 bg-[#2D241E] relative overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div>
+            <span className="text-primary font-bold tracking-widest uppercase text-sm mb-2 block">Referenzen</span>
+            <h2 className="font-display font-bold text-4xl md:text-6xl text-white">
+              Unsere <span className="italic text-secondary">Handschrift</span>
+            </h2>
+          </div>
+          <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 rounded-full px-6">
+            Alle Projekte ansehen
+          </Button>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-center mt-16"
-        >
-          <p className="font-body text-accent-brown mb-6 text-lg">
-            Möchten Sie mehr Projekte sehen oder uns persönlich kennenlernen?
-          </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-3 px-10 py-4 bg-accent-orange text-white rounded-full font-body font-bold text-lg hover:bg-accent-orange-dark transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Vereinbaren Sie einen Termin
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </a>
-        </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Project List - Left Side */}
+          <div className="lg:col-span-4 space-y-2">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`
+                  p-8 cursor-pointer transition-all duration-500 border-l-2
+                  ${activeProject === index
+                    ? "border-primary bg-white/5 pl-8"
+                    : "border-white/10 hover:border-white/30 pl-6 hover:pl-8 bg-transparent"
+                  }
+                `}
+                onMouseEnter={() => setActiveProject(index)}
+              >
+                <span className="text-xs text-primary/90 font-bold uppercase tracking-wider mb-2 block">
+                  {project.category}
+                </span>
+                <h3 className={`font-display font-bold text-2xl mb-3 ${activeProject === index ? "text-white" : "text-white/60"}`}>
+                  {project.title}
+                </h3>
+                <p className={`text-sm font-light leading-relaxed ${activeProject === index ? "text-gray-300" : "text-gray-500"}`}>
+                  {project.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Project Preview - Right Side */}
+          <div className="lg:col-span-8 h-[600px] relative group">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`
+                  absolute inset-0 rounded-sm overflow-hidden shadow-2xl transition-all duration-1000 ease-in-out
+                  ${activeProject === index
+                    ? "opacity-100 translate-x-0 z-10"
+                    : "opacity-0 translate-x-12 z-0"
+                  }
+                `}
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transform scale-105 group-hover:scale-100 transition-transform duration-[2s]"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2D241E]/90 via-transparent to-transparent opacity-40" />
+
+                <div className="absolute bottom-8 right-8">
+                  <Button
+                    className="rounded-full w-16 h-16 bg-white text-[#2D241E] hover:bg-primary hover:text-white transition-colors flex items-center justify-center shadow-lg"
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  >
+                    <ArrowUpRight className="w-6 h-6" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+
+            {/* Decorative Frame */}
+            <div className="absolute -inset-4 border border-white/10 -z-10 translate-x-4 translate-y-4" />
+          </div>
+        </div>
       </div>
     </section>
-  )
+  );
 }

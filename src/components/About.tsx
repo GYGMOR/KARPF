@@ -1,142 +1,136 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion } from "framer-motion";
+import { Users, Award, Leaf, Heart } from "lucide-react";
+import Image from "next/image";
 
 export default function About() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
-    },
-  }
-
   return (
-    <section
-      id="about"
-      ref={ref}
-      className="relative py-32 bg-neutral-cream overflow-hidden"
-    >
-      {/* Background Decoration */}
-      <div className="absolute top-0 right-0 w-1/2 h-full opacity-5">
-        <svg viewBox="0 0 200 200" className="w-full h-full">
-          <path
-            d="M 20 80 Q 80 20, 140 80 T 260 80"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary-green"
-          />
-        </svg>
-      </div>
+    <section id="about" className="pt-32 pb-20 bg-[#FDFBF7] text-foreground selection:bg-primary selection:text-primary-foreground overflow-x-hidden">
+      <main className="container mx-auto px-4">
+        {/* Title Section */}
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-[#2D241E] mb-6">
+            Über uns
+          </h2>
+          <p className="text-xl text-[#5D4E37] font-light leading-relaxed">
+            Mit Leidenschaft und Erfahrung gestalten wir seit Jahren Gärten, die begeistern.
+          </p>
+        </div>
 
-      <div className="container mx-auto px-6">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="max-w-6xl mx-auto"
-        >
-          <motion.div variants={itemVariants} className="mb-16 text-center">
-            <span className="inline-block px-6 py-2 bg-primary-green/10 rounded-full text-primary-green font-body font-semibold text-sm tracking-wider mb-6">
-              ÜBER UNS
-            </span>
-            <h2 className="font-display text-5xl md:text-7xl font-bold text-accent-brown mb-8">
-              Leidenschaft für
-              <br />
-              <span className="text-primary-green">grüne Welten</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <motion.div variants={itemVariants} className="space-y-6">
-              <p className="font-body text-lg md:text-xl text-accent-brown/80 leading-relaxed">
-                KARPF steht seit über zwei Jahrzehnten für erstklassige
-                Gartengestaltung und professionellen Landschaftsbau in
-                Sarmenstorf und der gesamten Region.
-              </p>
-              <p className="font-body text-lg md:text-xl text-accent-brown/80 leading-relaxed">
-                Mit Herzblut, Fachkompetenz und einem Auge für Details verwandeln
-                wir Ihre Gartenträume in grüne Oasen. Ob Neubau, Umgestaltung
-                oder regelmässige Pflege – wir sind Ihr verlässlicher Partner für
-                alle Gartenarbeiten.
-              </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                {['20+ Jahre Erfahrung', 'Qualitätsarbeit', 'Persönliche Beratung'].map((item) => (
-                  <span
-                    key={item}
-                    className="px-4 py-2 bg-white rounded-full text-primary-green font-body font-semibold text-sm shadow-md flex items-center gap-2"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="relative">
-              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl">
-                {/* Background Image */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&auto=format&fit=crop)' }}
-                />
-                {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-green/80 to-primary-green-dark/80" />
-
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white p-8">
-                    <div className="text-7xl font-display font-bold mb-4 drop-shadow-lg">20+</div>
-                    <div className="text-xl font-body drop-shadow-md">Jahre Erfahrung</div>
-                    <div className="text-sm font-body opacity-90 mt-2 drop-shadow-md">in Gartenbau</div>
-                  </div>
-                </div>
-                {/* Decorative circles */}
-                <div className="absolute top-8 right-8 w-24 h-24 bg-accent-orange rounded-full opacity-30 blur-xl" />
-                <div className="absolute bottom-12 left-12 w-32 h-32 bg-primary-green-light rounded-full opacity-30 blur-xl" />
-              </div>
-              
-              {/* Floating card */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 1, duration: 0.8 }}
-                className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-2xl max-w-xs"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-primary-green/10 rounded-full flex items-center justify-center">
-                    <svg className="w-8 h-8 text-primary-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="font-display text-2xl font-bold text-accent-brown">100%</div>
-                    <div className="font-body text-sm text-accent-brown/70">Kundenzufriedenheit</div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+        {/* Story Section */}
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+          <div className="space-y-6">
+            <h3 className="font-display text-4xl font-bold text-[#2D241E]">
+              Unsere Geschichte
+            </h3>
+            <p className="text-[#5D4E37] leading-relaxed">
+              KARPF steht für höchste Qualität im Gartenbau. Was als kleine Familienbetrieb begann,
+              hat sich zu einem führenden Unternehmen für Gartengestaltung und Landschaftsbau entwickelt.
+            </p>
+            <p className="text-[#5D4E37] leading-relaxed">
+              Unser Team aus erfahrenen Landschaftsgärtnern verbindet traditionelles Handwerk mit modernen
+              Gestaltungskonzepten. Jedes Projekt wird mit Liebe zum Detail und höchstem Qualitätsanspruch umgesetzt.
+            </p>
           </div>
-        </motion.div>
-      </div>
+          <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+            <Image
+              src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&q=80"
+              alt="Gartenbau Arbeit"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Values Section */}
+        <div className="bg-[#2D241E] py-20 -mx-4 md:rounded-3xl shadow-3xl mb-20">
+          <div className="container mx-auto px-4">
+            <h2 className="font-display text-4xl font-bold text-white text-center mb-16">
+              Unsere Werte
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  icon: Leaf,
+                  title: "Nachhaltigkeit",
+                  description: "Wir setzen auf umweltfreundliche Materialien und nachhaltige Methoden."
+                },
+                {
+                  icon: Award,
+                  title: "Qualität",
+                  description: "Höchste Handwerkskunst und sorgfältige Ausführung in jedem Detail."
+                },
+                {
+                  icon: Users,
+                  title: "Teamwork",
+                  description: "Gemeinsam erreichen wir aussergewöhnliche Ergebnisse."
+                },
+                {
+                  icon: Heart,
+                  title: "Leidenschaft",
+                  description: "Wir lieben, was wir tun - und das sieht man in jedem Projekt."
+                }
+              ].map((value, index) => (
+                <div key={index} className="text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary mb-6">
+                    <value.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-white mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="text-[#D7CCC8] font-light">
+                    {value.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Team Section */}
+        <div className="mt-20">
+          <h2 className="font-display text-4xl font-bold text-[#2D241E] text-center mb-16">
+            Unser Team
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Erdzan Kalac",
+                role: "Geschäftsführer",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80"
+              },
+              {
+                name: "Mitarbeiter",
+                role: "Landschaftsgärtner",
+                image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80"
+              },
+              {
+                name: "Mitarbeiter",
+                role: "Gartengestalter",
+                image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80"
+              }
+            ].map((member, index) => (
+              <div key={index} className="group">
+                <div className="relative h-80 rounded-2xl overflow-hidden mb-4 shadow-lg">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <h3 className="font-display text-xl font-bold text-[#2D241E] mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-primary font-light">
+                  {member.role}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
     </section>
-  )
+  );
 }

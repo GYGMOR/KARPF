@@ -1,21 +1,30 @@
+'use client'
+
+import React from 'react'
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
-import About from '@/components/About'
+import FleetImage from '@/components/FleetImage'
 import Services from '@/components/Services'
 import Projects from '@/components/Projects'
+import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import { Toaster } from '@/components/ui/sonner'
 
-export default function Home() {
+export default function Page() {
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen bg-[#2D241E] text-foreground selection:bg-primary selection:text-primary-foreground overflow-x-hidden">
       <Navigation />
-      <Hero />
-      <About />
-      <Services />
-      <Projects />
-      <Contact />
+      <main>
+        <Hero />
+        <FleetImage />
+        <Services />
+        <Projects />
+        <About />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+      <Toaster position="top-center" />
+    </div>
   )
 }
