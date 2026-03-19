@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export default function Hero() {
   const textRef = useRef<HTMLDivElement>(null);
@@ -37,9 +38,9 @@ export default function Hero() {
         >
           <source src="/videos/hero-garden.mp4" type="video/mp4" />
           {/* Fallback image if video fails to load */}
-          <Image src="/images/hero-garden-natural.png" alt="Garden Background" fill className="object-cover" />
-          {/* Fallback image if video fails to load */}
-          <img src="/images/hero-garden-natural.png" alt="Garden Background" className="w-full h-full object-cover" />
+          <div className="absolute inset-0">
+            <Image src="/images/hero-garden-natural.png" alt="Garden Background" fill className="object-cover" />
+          </div>
         </video>
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#2D241E]/40 via-[#2D241E]/20 to-[#2D241E]/80" />
